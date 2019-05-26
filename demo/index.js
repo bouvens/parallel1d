@@ -53,27 +53,32 @@ function print (text) {
 function printArray (name, array) {
   print(`${name} = [${array.slice(0, PRINT_LIMIT).join(', ')}, ...]`)
 }
-function printTime (startTime) {
-  const time = new Date() - startTime
-  print(`Running time: ${time} ms\n`)
+function printCalculationTime (time) {
+  print(`Calculation time: ${time} ms\n`)
 }
 
-print(`There'll be ${INPUT_LENGTH.toLocaleString('en-US')} numbers 1–${INPUT_MAX.toLocaleString('en-US')} in every array.
+print(`There'll be ${INPUT_LENGTH.toLocaleString('en-US')} numbers in range 1–${
+  INPUT_MAX.toLocaleString('en-US')} in original array.
 Calculating...\n`)
 
 let start
+let syncTime
+let asyncTime
 
 startQueue(
   (resolve) => {
+    start = new Date()
     let input = generateInput(INPUT_MAX, INPUT_LENGTH) // heavy function
     printArray('input', input)
+    print(`Generation time: ${new Date() - start} ms\n`)
     resolve(input)
   },
   (resolve, input) => {
     start = new Date()
     const syncRunResult = synchronousRun(input, isSimple) // heavy function
-    printArray('synchronous factorials', syncRunResult)
-    printTime(start)
+    syncTime = new Date() - start
+    printArray('synchronous simplicity checking', syncRunResult)
+    printCalculationTime(syncTime)
     resolve(input)
   },
   (resolve, input) => {
@@ -83,8 +88,11 @@ startQueue(
     workers.start({ input }, input.length)
   },
   (resolve, result) => {
-    printArray('web workers factorials', result)
-    printTime(start)
-    print(`Done.`)
+    asyncTime = new Date() - start
+    printArray('web workers simplicity checking', result)
+    printCalculationTime(asyncTime)
+    const timesFaster = Math.trunc(syncTime / asyncTime * 100) / 100
+    print(`Parallel calculations were ~${timesFaster} times faster.`)
+    print(`--------`)
   },
 )
