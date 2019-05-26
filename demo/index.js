@@ -1,61 +1,10 @@
+const { startQueue, print, printArray, printCalculationTime } = require('./display')
+const { generateInput, isSimple } = require('./synchronous')
 const Parallel = require('../')
-const SlowFactorialWorker = require('./factorial.worker')
+const SlowFactorialWorker = require('./simple.worker')
 
 const INPUT_MAX = 50000
 const INPUT_LENGTH = 1000000
-const PRINT_LIMIT = 10
-
-function generateInput (max, length) {
-  const data = []
-
-  for (let i = 0; i < length; i++) {
-    data.push(Math.floor(Math.random() * max) + 1)
-  }
-
-  return data
-}
-
-function isSimple (n) {
-  for (let i = 2; i <= Math.sqrt(n); i++) {
-    if (!(n % i)) {
-      return false
-    }
-  }
-
-  return true
-}
-
-function startQueue () {
-  const wrapped = []
-
-  for (let i = 0; i < arguments.length; i++) {
-    wrapped[i] = (passedResult) => {
-      setTimeout(() => {
-        arguments[i](i === arguments.length - 1 ? () => void 0 : (result) => {
-          wrapped[i + 1](result)
-        }, passedResult)
-      })
-    }
-  }
-
-  wrapped[0]()
-}
-
-function synchronousRun (input, processor) {
-  return input.map(processor)
-}
-
-const benchmark = document.getElementById('benchmark-results')
-function print (text) {
-  benchmark.innerText += `${text}\n`
-}
-
-function printArray (name, array) {
-  print(`${name} = [${array.slice(0, PRINT_LIMIT).join(', ')}, ...]`)
-}
-function printCalculationTime (time) {
-  print(`Calculation time: ${time} ms\n`)
-}
 
 print(`There'll be ${INPUT_LENGTH.toLocaleString('en-US')} numbers in range 1–${
   INPUT_MAX.toLocaleString('en-US')} in original array.
@@ -75,7 +24,7 @@ startQueue(
   },
   (resolve, input) => {
     start = new Date()
-    const syncRunResult = synchronousRun(input, isSimple) // heavy function
+    const syncRunResult = input.map(isSimple) // heavy function
     syncTime = new Date() - start
     printArray('synchronous simplicity checking', syncRunResult)
     printCalculationTime(syncTime)
