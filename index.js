@@ -1,8 +1,17 @@
-module.exports = function WorkersWrapper (
+const DEFAULTS = {
+  handleError: console.error,
+  numberOfWorkers: navigator.hardwareConcurrency,
+  ArrayConstructor: Array,
+}
+
+module.exports = function Parallel1d (
   Worker,
   handleUpdate,
-  handleError,
-  numberOfWorkers = navigator.hardwareConcurrency,
+  {
+    handleError = DEFAULTS.handleError,
+    numberOfWorkers = DEFAULTS.numberOfWorkers,
+    ArrayConstructor = DEFAULTS.ArrayConstructor,
+  } = DEFAULTS,
 ) {
   let workers = []
   let finished
@@ -20,10 +29,14 @@ module.exports = function WorkersWrapper (
     }
 
     let offset = 0
-    const flattened = new Int8Array(length)
+    let flattened = ArrayConstructor === Array ? [] : new ArrayConstructor(length)
 
     for (let i = 0; i < numberOfWorkers; i++) {
-      flattened.set(result[i], offset)
+      if (flattened.concat) {
+        flattened = flattened.concat(result[i])
+      } else {
+        flattened.set(result[i], offset)
+      }
       offset += result[i].length
     }
     handleUpdate(flattened)
@@ -34,7 +47,7 @@ module.exports = function WorkersWrapper (
     result[i] = data
     finished += 1
     if (finished === numberOfWorkers) {
-      returnUpdated(handleUpdate)
+      returnUpdated()
     }
   }
 

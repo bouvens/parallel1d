@@ -1,4 +1,5 @@
 const Parallel = require('../')
+const SlowFactorialWorker = require('./factorial.worker')
 
 const INPUT_MAX = 100
 const INPUT_LENGTH = 10000000
@@ -50,11 +51,14 @@ function print (text) {
 }
 
 function printArray (name, array) {
-  print(`${name} = [${array.slice(0, PRINT_LIMIT).join(', ')}, ...]\n`)
+  print(`${name} = [${array.slice(0, PRINT_LIMIT).join(', ')}, ...]`)
 }
 
 print(`There'll be ${INPUT_LENGTH.toLocaleString('en-US')} elements in every array.
 Calculating...\n`)
+
+let start
+
 startQueue(
   (resolve) => {
     let input = generateInput(INPUT_MAX, INPUT_LENGTH) // heavy function
@@ -62,11 +66,23 @@ startQueue(
     resolve(input)
   },
   (resolve, input) => {
+    start = new Date()
     const syncRunResult = synchronousRun(input, slowFactorial) // heavy function
-    printArray('synchronous run of factorial', syncRunResult)
+    const time = new Date() - start
+    printArray('synchronous factorials', syncRunResult)
+    print(`Running time: ${time} ms\n`)
     resolve(input)
   },
-  () => {
+  (resolve, input) => {
+    start = new Date()
+    const workers = new Parallel(SlowFactorialWorker, resolve)
+    workers.initialize() //  TODO add queue
+    workers.start({ input }, input.length)
+  },
+  (resolve, result) => {
+    const time = new Date() - start
+    printArray('web workers factorials', result)
+    print(`Running time: ${time} ms\n`)
     print(`Done.`)
   },
 )

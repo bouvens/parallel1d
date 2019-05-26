@@ -19,12 +19,14 @@ module.exports = () => {
     module: {
       rules: [
         {
-          rules: [
-            {
-              test: /\.css$/,
-              use: [MiniCssExtractPlugin.loader, 'css-loader'],
-            },
-          ],
+          test: /\.worker\.js$/,
+          use: {
+            loader: 'worker-loader',
+          },
+        },
+        {
+          test: /\.css$/,
+          use: [MiniCssExtractPlugin.loader, 'css-loader'],
         },
       ],
     },
