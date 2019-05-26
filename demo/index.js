@@ -26,14 +26,15 @@ function slowFactorial (n) {
 
 function startQueue () {
   const wrapped = []
-  const lastArgumentNumber = arguments.length - 1
 
-  for (let i = lastArgumentNumber; i >= 0; i--) {
+  for (let i = 0; i < arguments.length; i++) {
     wrapped[i] = (passedResults) => {
-      let results = arguments[i](passedResults)
-      if (i !== lastArgumentNumber) {
-        setTimeout(wrapped[i + 1], 0, results)
-      }
+      setTimeout(() => {
+        let result = arguments[i](passedResults)
+        if (i !== arguments.length - 1) {
+          wrapped[i + 1](result)
+        }
+      })
     }
   }
 
@@ -53,11 +54,9 @@ function printArray (name, array) {
   print(`${name} = [${array.slice(0, PRINT_LIMIT).join(', ')}, ...]\n`)
 }
 
-startQueue(
-  () => {
-    print(`There'll be ${INPUT_LENGTH.toLocaleString('en-US')} elements in every array.
+print(`There'll be ${INPUT_LENGTH.toLocaleString('en-US')} elements in every array.
 Calculating...\n`)
-  },
+startQueue(
   () => {
     let input = generateInput(INPUT_MAX, INPUT_LENGTH) // heavy function
     printArray('input', input)
