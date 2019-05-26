@@ -1,0 +1,47 @@
+{
+  "name": "parallel1d",
+  "version": "0.1.0",
+  "description": "Web worker wrapper for paralleling tasks on 1D arrays",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --mode development",
+    "build": "webpack --mode production",
+    "lint": "eslint *.js",
+    "size": "size-limit",
+    "deploy": "npm run-script build && gh-pages -d build",
+    "postpublish": "git push origin --all; git push origin --tags"
+  },
+  "size-limit": [
+    {
+      "path": "./index.js"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "bouvens/parallel1d"
+  },
+  "keywords": [
+    "javascript",
+    "npm"
+  ],
+  "author": "Alexander Demin <bouvens@gmail.com> (https://bouvens.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bouvens/parallel1d/issues"
+  },
+  "homepage": "https://github.com/bouvens/parallel1d#readme",
+  "devDependencies": {
+    "clean-webpack-plugin": "^2.0.2",
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-import-resolver-node": "^0.3.2",
+    "eslint-plugin-import": "^2.14.0",
+    "gh-pages": "^2.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.6.0",
+    "size-limit": "^1.2.0",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  }
+}
