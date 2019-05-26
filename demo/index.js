@@ -53,6 +53,10 @@ function print (text) {
 function printArray (name, array) {
   print(`${name} = [${array.slice(0, PRINT_LIMIT).join(', ')}, ...]`)
 }
+function printTime (startTime) {
+  const time = new Date() - startTime
+  print(`Running time: ${time} ms\n`)
+}
 
 print(`There'll be ${INPUT_LENGTH.toLocaleString('en-US')} elements in every array.
 Calculating...\n`)
@@ -68,21 +72,19 @@ startQueue(
   (resolve, input) => {
     start = new Date()
     const syncRunResult = synchronousRun(input, slowFactorial) // heavy function
-    const time = new Date() - start
     printArray('synchronous factorials', syncRunResult)
-    print(`Running time: ${time} ms\n`)
+    printTime(start)
     resolve(input)
   },
   (resolve, input) => {
     start = new Date()
     const workers = new Parallel(SlowFactorialWorker, resolve)
-    workers.initialize() //  TODO add queue
+    workers.initialize() // TODO add queue
     workers.start({ input }, input.length)
   },
   (resolve, result) => {
-    const time = new Date() - start
     printArray('web workers factorials', result)
-    print(`Running time: ${time} ms\n`)
+    printTime(start)
     print(`Done.`)
   },
 )
