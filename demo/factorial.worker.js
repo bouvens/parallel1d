@@ -1,15 +1,20 @@
-onmessage = function slowFactorial ({ data: { input, from, to } }) {
+function isSimple (n) {
+  for (let i = 2; i <= Math.sqrt(n); i++) {
+    if (!(n % i)) {
+      return false
+    }
+  }
+
+  return true
+}
+
+onmessage = function ({ data: { input, from, to } }) {
   const result = []
 
   for (let j = from; j < to; j++) {
     const n = input[j]
-    let factorial = 1
 
-    for (let i = 1; i <= n; i++) {
-      factorial *= i
-    }
-
-    result.push(factorial)
+    result.push(isSimple(n))
   }
 
   postMessage(result)

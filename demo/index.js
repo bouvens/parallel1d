@@ -1,9 +1,9 @@
 const Parallel = require('../')
 const SlowFactorialWorker = require('./factorial.worker')
 
-const INPUT_MAX = 100
-const INPUT_LENGTH = 10000000
-const PRINT_LIMIT = 5
+const INPUT_MAX = 50000
+const INPUT_LENGTH = 1000000
+const PRINT_LIMIT = 10
 
 function generateInput (max, length) {
   const data = []
@@ -15,14 +15,14 @@ function generateInput (max, length) {
   return data
 }
 
-function slowFactorial (n) {
-  let factorial = 1
-
-  for (let i = 1; i <= n; i++) {
-    factorial *= i
+function isSimple (n) {
+  for (let i = 2; i <= Math.sqrt(n); i++) {
+    if (!(n % i)) {
+      return false
+    }
   }
 
-  return factorial
+  return true
 }
 
 function startQueue () {
@@ -58,7 +58,7 @@ function printTime (startTime) {
   print(`Running time: ${time} ms\n`)
 }
 
-print(`There'll be ${INPUT_LENGTH.toLocaleString('en-US')} elements in every array.
+print(`There'll be ${INPUT_LENGTH.toLocaleString('en-US')} numbers 1–${INPUT_MAX.toLocaleString('en-US')} in every array.
 Calculating...\n`)
 
 let start
@@ -71,7 +71,7 @@ startQueue(
   },
   (resolve, input) => {
     start = new Date()
-    const syncRunResult = synchronousRun(input, slowFactorial) // heavy function
+    const syncRunResult = synchronousRun(input, isSimple) // heavy function
     printArray('synchronous factorials', syncRunResult)
     printTime(start)
     resolve(input)
