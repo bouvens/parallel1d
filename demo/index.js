@@ -28,12 +28,11 @@ function startQueue () {
   const wrapped = []
 
   for (let i = 0; i < arguments.length; i++) {
-    wrapped[i] = (passedResults) => {
+    wrapped[i] = (passedResult) => {
       setTimeout(() => {
-        let result = arguments[i](passedResults)
-        if (i !== arguments.length - 1) {
+        arguments[i](i === arguments.length - 1 ? () => void 0 : (result) => {
           wrapped[i + 1](result)
-        }
+        }, passedResult)
       })
     }
   }
@@ -57,15 +56,15 @@ function printArray (name, array) {
 print(`There'll be ${INPUT_LENGTH.toLocaleString('en-US')} elements in every array.
 Calculating...\n`)
 startQueue(
-  () => {
+  (resolve) => {
     let input = generateInput(INPUT_MAX, INPUT_LENGTH) // heavy function
     printArray('input', input)
-    return input
+    resolve(input)
   },
-  (input) => {
+  (resolve, input) => {
     const syncRunResult = synchronousRun(input, slowFactorial) // heavy function
     printArray('synchronous run of factorial', syncRunResult)
-    return input
+    resolve(input)
   },
   () => {
     print(`Done.`)
