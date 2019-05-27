@@ -4,7 +4,7 @@
   "description": "Parallel computations on 1D arrays for Javascript",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development",
+    "start": "webpack-dev-server --mode development --open",
     "start-production": "webpack-dev-server --mode production",
     "build": "webpack --mode production",
     "lint": "eslint *.js",

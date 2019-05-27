@@ -50,6 +50,7 @@ The worker may be imported just by `const myWorker = new Worker('sample.worker.j
 /**
  * index.js
  */
+
 import Parallel from 'parallel1d'
 import SampleWorker from 'worker-loader!./sample.worker.js'
 
@@ -97,8 +98,6 @@ cd parallel1d
 yarn
 yarn run start
 ```
-
-Then open [http://localhost:8080/](http://localhost:8080/)
 
 For sure you are able to use `npm` instead of `yarn`.
 
