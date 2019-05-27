@@ -1,7 +1,7 @@
 {
   "name": "parallel1d",
   "version": "0.1.0",
-  "description": "Web worker wrapper for paralleling tasks on 1D arrays",
+  "description": "Parallel computations on 1D arrays for Javascript",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development",

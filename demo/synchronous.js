@@ -9,7 +9,7 @@ function generateInput (max, length) {
 }
 
 function isSimple (n) {
-  for (let i = 2; i <= Math.sqrt(n); i++) {
+  for (let i = 2; i <= n; i++) {
     if (!(n % i)) {
       return false
     }

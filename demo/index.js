@@ -12,15 +12,15 @@ const { generateInput, isSimple } = require('./synchronous')
 const Parallel = require('../')
 const SlowFactorialWorker = require('./simple.worker')
 
-const INPUT_MAX = 50000
-const INPUT_LENGTH = 1000000
+const INPUT_MAX = 100000
+const INPUT_LENGTH = 100000
 
 function benchmark() {
   showStart()
   clear()
 
   print(`There'll be ${INPUT_LENGTH.toLocaleString('en-US')} numbers in range 1–${
-    INPUT_MAX.toLocaleString('en-US')} in original array.\n`)
+    INPUT_MAX.toLocaleString('en-US')} in the original array.\n`)
 
   startQueue(
     (resolve) => {
