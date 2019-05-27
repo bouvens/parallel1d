@@ -10,7 +10,7 @@
     "lint": "eslint *.js",
     "size": "size-limit",
     "deploy": "npm run-script build && gh-pages -d build",
-    "postpublish": "git push --all origin; git push origin --tags"
+    "postpublish": "git push --all origin && git push origin --tags"
   },
   "size-limit": [
     {
