@@ -2,6 +2,10 @@ const PRINT_LIMIT = 10
 
 const benchmarkResults = document.getElementById('benchmark-results')
 
+function clear () {
+  benchmarkResults.innerText = ''
+}
+
 function print (text) {
   benchmarkResults.innerText += `${text}\n`
 }
@@ -30,4 +34,4 @@ function startQueue () {
   wrapped[0]()
 }
 
-module.exports = { startQueue, print, printArray, printCalculationTime }
+module.exports = { startQueue, clear, print, printArray, printCalculationTime }
