@@ -56,6 +56,7 @@ module.exports = function Parallel1d (
       worker.terminate()
     })
     workers = []
+    return this
   }
 
   const catchError = (error) => {
@@ -64,7 +65,7 @@ module.exports = function Parallel1d (
     handleError(error)
   }
 
-  this.initialize = () => {
+  function initialize () {
     for (let i = 0; i < numberOfWorkers; i++) {
       workers[i] = new Worker()
       workers[i].addEventListener('message', catchUpdate(i))
@@ -72,13 +73,15 @@ module.exports = function Parallel1d (
     }
   }
 
-  this.initialize()
-
   this.start = (options, jobSize) => {
     let from = jobSize % numberOfWorkers
     const step = (jobSize - from) / numberOfWorkers
 
     reinitializeResult()
+
+    if (!workers.length) {
+      initialize()
+    }
 
     for (let i = 0; i < numberOfWorkers; i++) {
       const to = from + step
@@ -89,5 +92,6 @@ module.exports = function Parallel1d (
       })
       from = to
     }
+    return this
   }
 }

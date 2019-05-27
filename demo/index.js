@@ -35,7 +35,6 @@ Calculating...\n`)
       const workers = new Parallel(SlowFactorialWorker, (result) => {
         resolve({ result, syncTime, start })
       })
-      workers.initialize() // TODO add queue
       workers.start({ input }, input.length)
     },
     (resolve, { result, syncTime, start }) => {
