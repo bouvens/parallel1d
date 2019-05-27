@@ -1,0 +1,20 @@
+body {
+  margin: 2em 4em;
+  font-family: sans-serif;
+}
+
+li {
+  line-height: 1.4;
+}
+
+pre {
+  border-radius: 5px;
+  padding: 1em 2em;
+  background-color: #ddd;
+  white-space: pre-wrap;
+}
+
+.hidden {
+  display: none;
+}
+
