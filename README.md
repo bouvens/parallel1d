@@ -79,6 +79,12 @@ const workers = new Parallel(SampleWorker, console.log, {
 })
 ```
 
+### Terminating
+If you need to stop all workers immediately, just call:
+```javascript
+workers.terminate()
+```
+
 ## Just 401 byte
 
 Size and times are defined with [size-limit](https://www.npmjs.com/package/size-limit):
