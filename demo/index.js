@@ -1,4 +1,13 @@
-const { startQueue, clear, print, printArray, printCalculationTime } = require('./display')
+const {
+  startQueue,
+  clear,
+  print,
+  printArray,
+  printCalculationTime,
+  restartButton,
+  showStart,
+  showEnd,
+} = require('./display')
 const { generateInput, isSimple } = require('./synchronous')
 const Parallel = require('../')
 const SlowFactorialWorker = require('./simple.worker')
@@ -7,12 +16,11 @@ const INPUT_MAX = 50000
 const INPUT_LENGTH = 1000000
 
 function benchmark() {
-  restartButton.disabled = true
+  showStart()
   clear()
 
   print(`There'll be ${INPUT_LENGTH.toLocaleString('en-US')} numbers in range 1–${
-    INPUT_MAX.toLocaleString('en-US')} in original array.
-Calculating...\n`)
+    INPUT_MAX.toLocaleString('en-US')} in original array.\n`)
 
   startQueue(
     (resolve) => {
@@ -43,13 +51,11 @@ Calculating...\n`)
       printCalculationTime(asyncTime)
       const timesFaster = Math.trunc(syncTime / asyncTime * 100) / 100
       print(`Parallel calculations were ~${timesFaster} times faster.`)
-      print(`--------`)
-      restartButton.disabled = false
+      showEnd()
     },
   )
 }
 
-const restartButton = document.getElementById('restart')
 restartButton.addEventListener('click', benchmark)
 
 benchmark()

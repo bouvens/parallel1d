@@ -1,6 +1,9 @@
 const PRINT_LIMIT = 10
 
 const benchmarkResults = document.getElementById('benchmark-results')
+const restartButton = document.getElementById('restart')
+const loader = document.getElementById('loader')
+const hiddenClass = 'hidden'
 
 function clear () {
   benchmarkResults.innerText = ''
@@ -34,4 +37,23 @@ function startQueue () {
   wrapped[0]()
 }
 
-module.exports = { startQueue, clear, print, printArray, printCalculationTime }
+function showStart () {
+  restartButton.disabled = true
+  loader.classList.remove(hiddenClass)
+}
+
+function showEnd () {
+  restartButton.disabled = false
+  loader.classList.add(hiddenClass)
+}
+
+module.exports = {
+  startQueue,
+  clear,
+  print,
+  printArray,
+  printCalculationTime,
+  restartButton,
+  showStart,
+  showEnd,
+}

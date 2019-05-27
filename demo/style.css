@@ -13,3 +13,7 @@ pre {
   background-color: #ddd;
   white-space: pre-wrap;
 }
+
+.hidden {
+  display: none;
+}
