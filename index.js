@@ -16,22 +16,23 @@ module.exports = function Parallel1d (
   let workers = []
   let finished
   let result
+  this.threads = numberOfWorkers
 
   function reinitializeResult () {
     finished = 0
     result = []
   }
 
-  function returnUpdated () {
+  const returnUpdated = () => {
     let length = 0
-    for (let i = 0; i < numberOfWorkers; i++) {
+    for (let i = 0; i < this.threads; i++) {
       length += result[i].length
     }
 
     let offset = 0
     let flattened = ArrayConstructor === Array ? [] : new ArrayConstructor(length)
 
-    for (let i = 0; i < numberOfWorkers; i++) {
+    for (let i = 0; i < this.threads; i++) {
       if (flattened.concat) {
         flattened = flattened.concat(result[i])
       } else {
@@ -46,7 +47,7 @@ module.exports = function Parallel1d (
   const catchUpdate = (i) => ({ data }) => {
     result[i] = data
     finished += 1
-    if (finished === numberOfWorkers) {
+    if (finished === this.threads) {
       returnUpdated()
     }
   }
@@ -65,8 +66,8 @@ module.exports = function Parallel1d (
     handleError(error)
   }
 
-  function initialize () {
-    for (let i = 0; i < numberOfWorkers; i++) {
+  const initialize = () => {
+    for (let i = 0; i < this.threads; i++) {
       workers[i] = new Worker()
       workers[i].addEventListener('message', catchUpdate(i))
       workers[i].addEventListener('error', catchError)
@@ -74,8 +75,8 @@ module.exports = function Parallel1d (
   }
 
   this.start = (options, jobSize) => {
-    let from = jobSize % numberOfWorkers
-    const step = (jobSize - from) / numberOfWorkers
+    let from = jobSize % this.threads
+    const step = (jobSize - from) / this.threads
 
     reinitializeResult()
 
@@ -83,7 +84,7 @@ module.exports = function Parallel1d (
       initialize()
     }
 
-    for (let i = 0; i < numberOfWorkers; i++) {
+    for (let i = 0; i < this.threads; i++) {
       const to = from + step
       workers[i].postMessage({
         ...options,

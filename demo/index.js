@@ -44,6 +44,7 @@ function benchmark() {
         resolve({ result, syncTime, start })
       })
       workers.start({ input }, input.length)
+      print(`Start ${workers.threads} workers.`)
     },
     (resolve, { result, syncTime, start }) => {
       const asyncTime = new Date() - start

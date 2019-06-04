@@ -21,6 +21,7 @@ function printCalculationTime (time) {
   print(`Calculation time: ${time} ms\n`)
 }
 
+// TODO rewrite it to promises instead of callbacks even it small demo loafer
 function startQueue () {
   const wrapped = []
 
