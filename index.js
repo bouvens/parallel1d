@@ -1,4 +1,5 @@
 const DEFAULTS = {
+  // eslint-disable-next-line no-console
   handleError: console.error,
   numberOfWorkers: navigator.hardwareConcurrency,
   ArrayConstructor: Array,

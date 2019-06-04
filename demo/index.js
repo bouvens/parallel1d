@@ -15,7 +15,7 @@ const SlowFactorialWorker = require('./simple.worker')
 const INPUT_MAX = 100000
 const INPUT_LENGTH = 100000
 
-function benchmark() {
+function benchmark () {
   showStart()
   clear()
 
@@ -25,7 +25,7 @@ function benchmark() {
   startQueue(
     (resolve) => {
       const start = new Date()
-      let input = generateInput(INPUT_MAX, INPUT_LENGTH) // heavy function
+      const input = generateInput(INPUT_MAX, INPUT_LENGTH) // heavy function
       printArray('input', input)
       print(`Generation time: ${new Date() - start} ms\n`)
       resolve(input)

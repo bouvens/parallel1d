@@ -22,13 +22,13 @@ function printCalculationTime (time) {
 }
 
 // TODO rewrite it to promises instead of callbacks even it small demo loafer
-function startQueue () {
+function startQueue (...queue) {
   const wrapped = []
 
-  for (let i = 0; i < arguments.length; i++) {
+  for (let i = 0; i < queue.length; i++) {
     wrapped[i] = (passedResult) => {
       setTimeout(() => {
-        arguments[i](i === arguments.length - 1 ? () => void 0 : (result) => {
+        queue[i](i === arguments.length - 1 ? () => void 0 : (result) => {
           wrapped[i + 1](result)
         }, passedResult)
       })
