@@ -25,15 +25,15 @@ function printCalculationTime (time) {
 function startQueue (...queue) {
   const wrapped = []
 
-  for (let i = 0; i < queue.length; i++) {
+  queue.forEach((func, i) => {
     wrapped[i] = (passedResult) => {
       setTimeout(() => {
-        queue[i](i === arguments.length - 1 ? () => void 0 : (result) => {
+        func(i === arguments.length - 1 ? () => void 0 : (result) => {
           wrapped[i + 1](result)
         }, passedResult)
       })
     }
-  }
+  })
 
   wrapped[0]()
 }
