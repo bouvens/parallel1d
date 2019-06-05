@@ -77,7 +77,11 @@ const workers = new Parallel(SampleWorker, console.log, {
   // may be typed array like Int32Array and Uint8ClampedArray, usual array by default
   ArrayConstructor: Array,
 })
+
+// get numberOfWorkers
+console.log(workers.threads)
 ```
+Get the `numberOfWorkers` set in options or by default from a `threads` property.
 
 ### Terminating
 If you need to stop all workers immediately, just call:
