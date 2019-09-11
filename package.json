@@ -18,10 +18,7 @@
       "path": "./index.js"
     }
   ],
-  "repository": {
-    "type": "git",
-    "url": "bouvens/parallel1d"
-  },
+  "repository": "github:bouvens/parallel1d",
   "keywords": [
     "javascript",
     "npm"
