@@ -50,7 +50,7 @@ function benchmark () {
       const asyncTime = new Date() - start
       printArray('web workers simplicity checking', result)
       printCalculationTime(asyncTime)
-      const timesFaster = Math.round(syncTime / asyncTime * 10) / 10
+      const timesFaster = Math.round((syncTime / asyncTime) * 10) / 10
       print(`Parallel calculations were ~${timesFaster} times faster.`)
       showEnd()
     },

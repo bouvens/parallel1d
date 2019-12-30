@@ -28,7 +28,7 @@ function startQueue (...queue) {
   queue.forEach((func, i) => {
     wrapped[i] = (passedResult) => {
       setTimeout(() => {
-        func(i === arguments.length - 1 ? () => void 0 : (result) => {
+        func(i === arguments.length - 1 ? () => undefined : (result) => {
           wrapped[i + 1](result)
         }, passedResult)
       })
