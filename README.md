@@ -1,10 +1,10 @@
 # Parallel1d
 [![npm][npm-badge]][npm] [![npm][npm-dt-badge]][npm] [![GitHub issues][issues-badge]][issues]
 
-Light helper for parallel calculations on one-dimensional arrays. It's web workers alternative for map method.
+A light helper for parallel calculations on one-dimensional arrays. Web workers are alternative here for Array.map method.
 
 ## [Demo and comparsion](https://bouvens.github.io/parallel1d/)
-   
+
 You can see a live demo at <img src="https://raw.githubusercontent.com/bouvens/parallel1d/master/demo/favicon.png" width=16 height=16> [https://bouvens.github.io/parallel1d/](https://bouvens.github.io/parallel1d/)
 The source code of this demo is available in [the repository](https://github.com/bouvens/parallel1d/tree/master/demo).
 
@@ -17,7 +17,7 @@ Run in a console:
 npm i parallel1d
 ```
 
-Web worker needs an external file as browsers limitation. Web worker always gets data property in `onmessage` function. Parallel1d will add `from` and `to` properties to divide a work.
+Web worker needs an external file as a browsers limitation. Web worker always gets data property in `onmessage` function. Parallel1d will also add `from` and `to` properties to divide work.
 ```javascript
 /**
  * sample.worker.js
@@ -42,7 +42,7 @@ onmessage = function ({ data: { input, from, to } }) {
 }
 ```
 
-The resulting array should be returned through `postMessage` function
+A worker returns the resulting array through the `postMessage` function.
 
 The worker may be imported just by `const myWorker = new Worker('sample.worker.js')`, or with [worker-loader](https://www.npmjs.com/package/worker-loader) in case of using Webpack.
 
@@ -84,7 +84,7 @@ console.log(workers.threads)
 Get the `numberOfWorkers` set in options or by default from a `threads` property.
 
 ### Terminating
-If you need to stop all workers immediately, just call:
+If you need to stop all workers immediately, call:
 ```javascript
 workers.terminate()
 ```
@@ -109,7 +109,7 @@ yarn
 yarn run start
 ```
 
-For sure you are able to use `npm` instead of `yarn`.
+For sure, you can use `npm` instead of `yarn`.
 
 [npm-badge]: https://img.shields.io/npm/v/parallel1d.png?style=flat-square
 [npm]: https://www.npmjs.com/package/parallel1d
