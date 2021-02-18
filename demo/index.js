@@ -9,8 +9,8 @@ const {
   showEnd,
 } = require('./display')
 const { generateInput, isSimple } = require('./synchronous')
-const Parallel = require('../')
-const SlowFactorialWorker = require('./simple.worker')
+const Parallel = require('..')
+const SlowFactorialWorker = require('./simple.worker').default
 
 const INPUT_MAX = 100000
 const INPUT_LENGTH = 100000
