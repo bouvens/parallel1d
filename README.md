@@ -89,7 +89,7 @@ If you need to stop all workers immediately, call:
 workers.terminate()
 ```
 
-## Just 401 byte
+## Just 419 bytes
 
 Size and times are defined with [size-limit](https://www.npmjs.com/package/size-limit):
 ```
