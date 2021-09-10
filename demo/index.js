@@ -10,7 +10,7 @@ const {
 } = require('./display')
 const { generateInput, isSimple } = require('./synchronous')
 const Parallel = require('..')
-const SlowFactorialWorker = require('./simple.worker').default
+const CheckSimplicityWorker = require('./simple.worker').default
 
 const INPUT_MAX = 100000
 const INPUT_LENGTH = 100000
@@ -40,7 +40,7 @@ function benchmark () {
     },
     (resolve, { input, syncTime }) => {
       const start = new Date()
-      const workers = new Parallel(SlowFactorialWorker, (result) => {
+      const workers = new Parallel(CheckSimplicityWorker, (result) => {
         resolve({ result, syncTime, start })
       })
       workers.start({ input }, input.length)

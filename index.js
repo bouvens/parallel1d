@@ -30,16 +30,24 @@ module.exports = function Parallel1d (
       length += result[i].length
     }
 
+    let flattened
+    let handleResult
     let offset = 0
-    let flattened = ArrayConstructor === Array ? [] : new ArrayConstructor(length)
+    if (ArrayConstructor === Array) {
+      flattened = []
+      handleResult = (addition) => {
+        flattened.push(...addition)
+      }
+    } else {
+      flattened = new ArrayConstructor(length)
+      handleResult = (addition) => {
+        flattened.set(addition, offset)
+        offset += addition.length
+      }
+    }
 
     for (let i = 0; i < this.threads; i++) {
-      if (flattened.concat) {
-        flattened = flattened.concat(result[i])
-      } else {
-        flattened.set(result[i], offset)
-      }
-      offset += result[i].length
+      handleResult(result[i])
     }
     handleUpdate(flattened)
     reinitializeResult()

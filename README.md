@@ -32,8 +32,8 @@ function double (n) {
 onmessage = function ({ data: { input, from, to } }) {
   const result = []
 
-  for (let j = from; j < to; j++) {
-    const n = input[j]
+  for (let i = from; i < to; i++) {
+    const n = input[i]
 
     result.push(double(n))
   }
@@ -74,7 +74,7 @@ const workers = new Parallel(SampleWorker, console.log, {
   // how much workers will be spawned, number of logical processors by default
   numberOfWorkers: navigator.hardwareConcurrency,
   // type of array to be returned from parallel1d and workers
-  // may be typed array like Int32Array and Uint8ClampedArray, usual array by default
+  // may be typed array like Int32Array and Uint8ClampedArray, Array by default
   ArrayConstructor: Array,
 })
 
