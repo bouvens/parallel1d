@@ -9,8 +9,8 @@
     "build": "webpack --mode production",
     "lint": "eslint --ext .js .",
     "lint:fix": "eslint --fix --ext .js .",
-    "size": "yarn run build && size-limit",
-    "deploy": "yarn run build && gh-pages -d build",
+    "size": "npm run build && size-limit",
+    "deploy": "npm run build && gh-pages -d build",
     "postpublish": "git push --all origin && git push origin --tags"
   },
   "size-limit": [

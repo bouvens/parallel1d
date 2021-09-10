@@ -105,11 +105,9 @@ Run in a console:
 ```bash
 git clone git@github.com:bouvens/parallel1d.git
 cd parallel1d
-yarn
-yarn run start
+npm install
+npm run start
 ```
-
-For sure, you can use `npm` instead of `yarn`.
 
 [npm-badge]: https://img.shields.io/npm/v/parallel1d.png?style=flat-square
 [npm]: https://www.npmjs.com/package/parallel1d
