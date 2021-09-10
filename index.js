@@ -5,7 +5,7 @@ const DEFAULTS = {
   ArrayConstructor: Array,
 }
 
-module.exports = function Parallel1d (
+module.exports = function Parallel1d(
   Worker,
   handleUpdate,
   {
@@ -19,7 +19,7 @@ module.exports = function Parallel1d (
   let result
   this.threads = numberOfWorkers
 
-  function reinitializeResult () {
+  function reinitializeResult() {
     finished = 0
     result = []
   }

@@ -5,24 +5,24 @@ const restartButton = document.getElementById('restart')
 const loader = document.getElementById('loader')
 const hiddenClass = 'hidden'
 
-function clear () {
+function clear() {
   benchmarkResults.innerText = ''
 }
 
-function print (text) {
+function print(text) {
   benchmarkResults.innerText += `${text}\n`
 }
 
-function printArray (name, array) {
+function printArray(name, array) {
   print(`${name} = [${array.slice(0, PRINT_LIMIT).join(', ')}, ...]`)
 }
 
-function printCalculationTime (time) {
+function printCalculationTime(time) {
   print(`Calculation time: ${time} ms\n`)
 }
 
 // TODO rewrite it to promises instead of callbacks even it small demo loafer
-function startQueue (...queue) {
+function startQueue(...queue) {
   const wrapped = []
 
   queue.forEach((func, i) => {
@@ -38,12 +38,12 @@ function startQueue (...queue) {
   wrapped[0]()
 }
 
-function showStart () {
+function showStart() {
   restartButton.disabled = true
   loader.classList.remove(hiddenClass)
 }
 
-function showEnd () {
+function showEnd() {
   restartButton.disabled = false
   loader.classList.add(hiddenClass)
 }

@@ -15,7 +15,7 @@ const CheckSimplicityWorker = require('./simple.worker').default
 const INPUT_MAX = 100000
 const INPUT_LENGTH = 100000
 
-function benchmark () {
+function benchmark() {
   showStart()
   clear()
 

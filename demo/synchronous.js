@@ -1,4 +1,4 @@
-function generateInput (max, length) {
+function generateInput(max, length) {
   const data = []
 
   for (let i = 0; i < length; i++) {
@@ -8,7 +8,7 @@ function generateInput (max, length) {
   return data
 }
 
-function isSimple (n) {
+function isSimple(n) {
   for (let i = 2; i <= n; i++) {
     if (!(n % i)) {
       return false
