@@ -21,23 +21,6 @@ function printCalculationTime(time) {
   print(`Calculation time: ${time} ms\n`)
 }
 
-// TODO rewrite it to promises instead of callbacks even it small demo loafer
-function startQueue(...queue) {
-  const wrapped = []
-
-  queue.forEach((func, i) => {
-    wrapped[i] = (passedResult) => {
-      setTimeout(() => {
-        func(i === arguments.length - 1 ? () => undefined : (result) => {
-          wrapped[i + 1](result)
-        }, passedResult)
-      })
-    }
-  })
-
-  wrapped[0]()
-}
-
 function showStart() {
   restartButton.disabled = true
   loader.classList.remove(hiddenClass)
@@ -49,7 +32,6 @@ function showEnd() {
 }
 
 module.exports = {
-  startQueue,
   clear,
   print,
   printArray,

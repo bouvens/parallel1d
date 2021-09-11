@@ -5,7 +5,7 @@ const DEFAULTS = {
   ArrayConstructor: Array,
 }
 
-module.exports = function Parallel1d(
+function Parallel1d(
   Worker,
   handleUpdate,
   {
@@ -105,3 +105,7 @@ module.exports = function Parallel1d(
     return this
   }
 }
+
+Parallel1d.DEFAULTS = DEFAULTS
+
+module.exports = Parallel1d

@@ -12,7 +12,7 @@ Example of usage: <img src="https://raw.githubusercontent.com/bouvens/griffeath-
 
 ## Usage
 
-Run in a console:
+Run in a project root to install the package
 ```bash
 npm i parallel1d
 ```
@@ -28,7 +28,7 @@ function double (n) {
   return n * 2
 }
 
-// it gets passed options for worker, `from` and `to`
+// it gets passed options for worker (i.e. `input`), and special props `from` and `to`
 onmessage = function ({ data: { input, from, to } }) {
   const result = []
 
@@ -42,7 +42,7 @@ onmessage = function ({ data: { input, from, to } }) {
 }
 ```
 
-A worker returns the resulting array through the `postMessage` function.
+A worker should return the resulting array through the `postMessage` function.
 
 The worker may be imported just by `const myWorker = new Worker('sample.worker.js')`, or with [worker-loader](https://www.npmjs.com/package/worker-loader) in case of using Webpack.
 
@@ -51,24 +51,39 @@ The worker may be imported just by `const myWorker = new Worker('sample.worker.j
  * index.js
  */
 
-import Parallel from 'parallel1d'
 import SampleWorker from 'worker-loader!./sample.worker.js'
+```
+
+You can run it as promise
+```javascript
+import parallel from 'parallel1d/promisified'
+
+const someNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+async function runWorkers() {
+  const result = await parallel(SampleWorker, { input: someNumbers }, someNumbers.length)
+  // it's possible to pass options as the 4th argument, check the Options section below
+}
+```
+
+Or you can use the older approach
+```javascript
+import Parallel from 'parallel1d'
 
 const someNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 // pass worker constructor and callback to process resulting array
 const workers = new Parallel(SampleWorker, console.log)
 // pass any options for worker and length of array to divide it to workers
 workers.start({ input: someNumbers }, someNumbers.length)
-// console: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
-```
 
-That's it.
+// You will see in console as result: [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+```
 
 ### Options
 
-Besides worker constructor and callback to process resulting array parallel1d constructor accepts options:
+We can pass options as the 4th argument to a promisified version
 ```javascript
-const workers = new Parallel(SampleWorker, console.log, {
+const options = {
   // handler for errors, console by default
   handleError: console.error,
   // how much workers will be spawned, number of logical processors by default
@@ -76,12 +91,27 @@ const workers = new Parallel(SampleWorker, console.log, {
   // type of array to be returned from parallel1d and workers
   // may be typed array like Int32Array and Uint8ClampedArray, Array by default
   ArrayConstructor: Array,
-})
+}
 
-// get numberOfWorkers
-console.log(workers.threads)
+await parallel(SampleWorker, { input }, input.length, options)
+
+// Besides worker constructor and callback to process resulting array parallel1d constructor accepts options as well
+const workers = new Parallel(SampleWorker, console.log, options)
 ```
-Get the `numberOfWorkers` set in options or by default from a `threads` property.
+
+### Getting info
+
+```javascript
+import Parallel from 'parallel1d'
+
+// Get and check defaults without calling constructor with `new`
+console.log('Defaults:', Parallel.DEFAULTS)
+
+const workers = new Parallel(SampleWorker, console.log)
+
+// Get the `numberOfWorkers` set in options or by default from a `threads` property
+console.log('Threads number:', workers.threads)
+```
 
 ### Terminating
 If you need to stop all workers immediately, call:
