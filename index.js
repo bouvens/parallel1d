@@ -95,6 +95,10 @@ function Parallel1d(
 
     for (let i = 0; i < this.threads; i++) {
       const to = from + step
+      if (!workers[i]) {
+        // we got an error and a pool was cleared
+        break
+      }
       workers[i].postMessage({
         ...options,
         from: i === 0 ? 0 : from,
