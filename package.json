@@ -3,6 +3,9 @@
   "version": "0.2.1",
   "description": "Parallel computations on 1D arrays for Javascript",
   "main": "index.js",
+  "files": [
+    "promisified.js"
+  ],
   "scripts": {
     "start": "webpack serve --mode development --open",
     "start-production": "webpack serve --mode production",
@@ -15,7 +18,10 @@
   },
   "size-limit": [
     {
-      "path": "./index.js"
+      "path": [
+        "./index.js",
+        "./promisified.js"
+      ]
     }
   ],
   "repository": "github:bouvens/parallel1d",

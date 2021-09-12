@@ -123,10 +123,7 @@ workers.terminate()
 
 Size and times are defined with [size-limit](https://www.npmjs.com/package/size-limit):
 ```
-  Package size: 419 B with all dependencies, minified and gzipped
-  Loading time: 10 ms on slow 3G
-  Running time: 45 ms on Snapdragon 410
-  Total time:   55 ms
+  Size: 502 B with all dependencies, minified and gzipped
 ```
 
 ## How to run demo locally
