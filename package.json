@@ -17,7 +17,7 @@
     "size": "size-limit",
     "preversion": "npm run test && npm run eslint",
     "deploy": "npm run build && gh-pages -d build",
-    "postpublish": "git push --all origin && git push origin --tags"
+    "prepublishOnly": "git push --all origin && git push origin --tags && npm run deploy"
   },
   "size-limit": [
     {
