@@ -27,11 +27,6 @@
       ]
     }
   ],
-  "jest": {
-    "testMatch": [
-      "**/tests/**/*.test.js"
-    ]
-  },
   "repository": "github:bouvens/parallel1d",
   "keywords": [
     "javascript",
