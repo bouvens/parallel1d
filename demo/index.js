@@ -12,20 +12,28 @@ const parallel = require('../promisified')
 const { DEFAULTS } = require('..')
 const FactorialWorker = require('./factorial.worker').default
 
-const INPUT_MAX = 100000
-const INPUT_LENGTH = 100000
+const INPUT_MAX = 300
+const INPUT_LENGTH = 50000
+
+const sleep = (ms) => new Promise((resolve) => { setTimeout(resolve, ms) })
 
 async function startQueue() {
+  await sleep(0)
+
   let start = new Date()
   const input = generateInput(INPUT_MAX, INPUT_LENGTH) // heavy function
   printArray('input', input)
   print(`Generation time: ${new Date() - start} ms\n`)
+
+  await sleep(700)
 
   start = new Date()
   const syncRunResult = input.map(factorial) // heavy function
   const syncTime = new Date() - start
   printArray('synchronous factorials calculating', syncRunResult)
   printCalculationTime(syncTime)
+
+  await sleep(700)
 
   start = new Date()
   print(`Start ${DEFAULTS.numberOfWorkers} workers`)
