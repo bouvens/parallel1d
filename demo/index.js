@@ -7,10 +7,10 @@ const {
   showStart,
   showEnd,
 } = require('./display')
-const { generateInput, isSimple } = require('./synchronous')
+const { generateInput, factorial } = require('./synchronous')
 const parallel = require('../promisified')
 const { DEFAULTS } = require('..')
-const CheckSimplicityWorker = require('./simple.worker').default
+const FactorialWorker = require('./factorial.worker').default
 
 const INPUT_MAX = 100000
 const INPUT_LENGTH = 100000
@@ -22,16 +22,16 @@ async function startQueue() {
   print(`Generation time: ${new Date() - start} ms\n`)
 
   start = new Date()
-  const syncRunResult = input.map(isSimple) // heavy function
+  const syncRunResult = input.map(factorial) // heavy function
   const syncTime = new Date() - start
-  printArray('synchronous simplicity checking', syncRunResult)
+  printArray('synchronous factorials calculating', syncRunResult)
   printCalculationTime(syncTime)
 
   start = new Date()
   print(`Start ${DEFAULTS.numberOfWorkers} workers`)
-  const result = await parallel(CheckSimplicityWorker, { input }, input.length)
+  const result = await parallel(FactorialWorker, { input }, input.length)
   const asyncTime = new Date() - start
-  printArray('web workers simplicity checking', result)
+  printArray('web workers factorials calculating', result)
   printCalculationTime(asyncTime)
 
   const timesFaster = Math.round((syncTime / asyncTime) * 10) / 10
@@ -44,7 +44,7 @@ function benchmark() {
   clear()
 
   print(`There'll be ${INPUT_LENGTH.toLocaleString('en-US')} numbers in range 1–${
-    INPUT_MAX.toLocaleString('en-US')} in the original array.\n`)
+    INPUT_MAX.toLocaleString('en-US')} in the original array. It will be calculated in BigNum and converted to Number for display.\n`)
 
   startQueue()
 }

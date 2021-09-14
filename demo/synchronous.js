@@ -8,14 +8,14 @@ function generateInput(max, length) {
   return data
 }
 
-function isSimple(n) {
-  for (let i = 2; i <= n; i++) {
-    if (!(n % i)) {
-      return false
-    }
+function factorial(n) {
+  let result = 1n
+
+  for (let i = 2n; i <= n; i++) {
+    result *= i
   }
 
-  return true
+  return result
 }
 
-module.exports = { generateInput, isSimple }
+module.exports = { generateInput, factorial }

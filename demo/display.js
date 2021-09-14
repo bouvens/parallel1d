@@ -14,7 +14,7 @@ function print(text) {
 }
 
 function printArray(name, array) {
-  print(`${name} = [${array.slice(0, PRINT_LIMIT).join(', ')}, ...]`)
+  print(`${name} = [${array.slice(0, PRINT_LIMIT).map(Number).join(', ')}, ...]`)
 }
 
 function printCalculationTime(time) {
