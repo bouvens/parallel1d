@@ -118,10 +118,14 @@ test('get defaults', () => {
 
 test('terminate workers', () => {
   const numberOfWorkers = 5
-  const terminateHandler = jest.fn()
-  const terminateWorker = mockWorker(function neverEnds() {
-    setTimeout(this.postMessageMock, 1000000)
-  }, terminateHandler)
+  const neverEnding = new Set()
+  function messageHandler() {
+    neverEnding.add(setTimeout(this.postMessageMock, 1000000))
+  }
+  const terminateHandler = jest.fn(() => {
+    neverEnding.forEach(clearTimeout)
+  })
+  const terminateWorker = mockWorker(messageHandler, terminateHandler)
 
   const workers = new Parallel(terminateWorker, () => {}, { numberOfWorkers })
   workers.start({ input }, input.length)
