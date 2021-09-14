@@ -107,6 +107,7 @@ test('set number of workers by configuration', () => {
 test('get defaults', () => {
   expect(Parallel.DEFAULTS).toStrictEqual({
     // handler for errors, console by default
+    // eslint-disable-next-line no-console
     handleError: console.error,
     // how much workers will be spawned, number of logical processors by default
     numberOfWorkers: globalThis.navigator.hardwareConcurrency,
