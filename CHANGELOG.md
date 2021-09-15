@@ -1,6 +1,13 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.0.0 (September 15, 2021)
+* New promisified version
+* Fix for error handling
+* Unit tests
+* Code refactoring and style updates
+* Development dependencies updates
+
 ## 0.2.1 (February 21, 2021)
 * Documentation updates
 * Development dependencies updates
