@@ -1,6 +1,6 @@
 {
   "name": "parallel1d",
-  "version": "0.2.1",
+  "version": "1.0.0",
   "description": "Parallel computations on 1D arrays for Javascript",
   "main": "index.js",
   "files": [
