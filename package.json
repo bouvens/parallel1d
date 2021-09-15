@@ -15,7 +15,7 @@
     "lint": "eslint --ext .js .",
     "lint:fix": "eslint --fix --ext .js .",
     "size": "size-limit",
-    "preversion": "npm run test && npm run eslint",
+    "preversion": "npm run test && npm run lint",
     "deploy": "npm run build && gh-pages -d build",
     "prepublishOnly": "git push --all origin && git push origin --tags && npm run deploy"
   },
