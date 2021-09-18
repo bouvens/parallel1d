@@ -31,24 +31,19 @@ function Parallel1d(
     }
 
     let flattened
-    let handleResult
     let offset = 0
+
     if (ArrayConstructor === Array) {
-      flattened = []
-      handleResult = (addition) => {
-        flattened.push(...addition)
-      }
+      flattened = [].concat(...result)
     } else {
       flattened = new ArrayConstructor(length)
-      handleResult = (addition) => {
+      for (let i = 0; i < this.threads; i++) {
+        const addition = result[i]
         flattened.set(addition, offset)
         offset += addition.length
       }
     }
 
-    for (let i = 0; i < this.threads; i++) {
-      handleResult(result[i])
-    }
     handleUpdate(flattened)
     reinitializeResult()
   }
