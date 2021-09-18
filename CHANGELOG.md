@@ -1,6 +1,10 @@
 # Change Log
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.0.1 (September 18, 2021)
+* Fix for big arrays
+* Fix if hardwareConcurrency is undefined
+
 ## 1.0.0 (September 15, 2021)
 * New promisified version
 * Fix for error handling
