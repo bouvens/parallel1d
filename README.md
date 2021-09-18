@@ -99,8 +99,8 @@ We can pass options as the 4th argument to a promisified version
 const options = {
   // handler for errors, console by default
   handleError: console.error,
-  // how much workers will be spawned, number of logical processors by default
-  numberOfWorkers: navigator.hardwareConcurrency,
+  // how much workers will be spawned, number of logical processors by default or 4 if undefined
+  numberOfWorkers: navigator.hardwareConcurrency || 4,
   // type of array to be returned from parallel1d and workers
   // may be typed array like Int32Array or Uint8ClampedArray, Array by default
   ArrayConstructor: Array,
