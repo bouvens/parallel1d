@@ -5,7 +5,7 @@
 A light helper for parallel calculations on one-dimensional arrays. Web workers are alternative here for
 Array.map method.
 
-## [Demo and comparsion](https://bouvens.github.io/parallel1d/)
+## [Demo and Comparsion](https://bouvens.github.io/parallel1d/)
 
 You can see a live demo
 at <img src="https://raw.githubusercontent.com/bouvens/parallel1d/master/demo/favicon.png" width=16 height=16> [https://bouvens.github.io/parallel1d/](https://bouvens.github.io/parallel1d/)
@@ -13,7 +13,7 @@ The source code of this demo is available
 in [the repository](https://github.com/bouvens/parallel1d/tree/master/demo).
 
 Example of
-usage: <img src="https://raw.githubusercontent.com/bouvens/griffeath-machine/4e27f6f5df4c6cc77c96ab2e3545cbdc1da0a433/img/favicon.png" width=16 height=16> [Griffeath's machine](https://bouvens.github.io/griffeath-machine/#/workers)
+usage: <img src="https://raw.githubusercontent.com/bouvens/griffeath-machine/4e27f6f5df4c6cc77c96ab2e3545cbdc1da0a433/img/favicon.png" width=16 height=16> [Griffeath's Machine](https://bouvens.github.io/griffeath-machine/#/workers)
 .
 
 ## Usage
@@ -112,7 +112,7 @@ await parallel(SampleWorker, { input }, input.length, options)
 const workers = new Parallel(SampleWorker, console.log, options)
 ```
 
-### Getting info
+### Getting Info
 
 ```javascript
 import Parallel from 'parallel1d'
@@ -135,7 +135,7 @@ If you need to stop all workers immediately, call:
 workers.terminate(callback)
 ```
 
-## Just 419 bytes
+## Just 419 Bytes
 
 Size and times are defined with [size-limit](https://www.npmjs.com/package/size-limit):
 
@@ -143,7 +143,7 @@ Size and times are defined with [size-limit](https://www.npmjs.com/package/size-
   Size: 502 B with all dependencies, minified and gzipped
 ```
 
-## How to run demo locally
+## How to Run the Demo Locally
 
 Run in a console:
 

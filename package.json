@@ -37,7 +37,7 @@
   "bugs": {
     "url": "https://github.com/bouvens/parallel1d/issues"
   },
-  "homepage": "https://github.com/bouvens/parallel1d#readme",
+  "homepage": "https://bouvens.github.io/parallel1d",
   "devDependencies": {
     "@size-limit/preset-small-lib": "^5.0.3",
     "clean-webpack-plugin": "^4.0.0",
