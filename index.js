@@ -1,6 +1,9 @@
 const DEFAULTS = {
-  // eslint-disable-next-line no-console
-  onError: console.error,
+  onError: !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+  || process.env.NODE_ENV === 'test'
+    // eslint-disable-next-line no-console
+    ? console.error
+    : () => {},
   numberOfWorkers: (globalThis.navigator || navigator).hardwareConcurrency || 4,
   ArrayConstructor: Array,
 }
