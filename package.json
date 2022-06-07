@@ -21,10 +21,10 @@
   },
   "size-limit": [
     {
-      "path": [
-        "./index.js",
-        "./promisified.js"
-      ]
+      "path": "./index.js"
+    },
+    {
+      "path": "./promisified.js"
     }
   ],
   "repository": "github:bouvens/parallel1d",
