@@ -1,4 +1,4 @@
-# Parallel1d
+# Parallel 1D
 
 [![npm][npm-badge]][npm] [![npm][npm-dt-badge]][npm] [![GitHub issues][issues-badge]][issues]
 
@@ -25,7 +25,7 @@ npm i parallel1d
 ```
 
 Web worker needs an external file as a browsers limitation. Web worker always gets data property
-in `onmessage` function. Parallel1d will also add `from` and `to` properties to divide work.
+in `onmessage` function. Parallel 1D will also add `from` and `to` properties to divide work.
 
 ```javascript
 /**
@@ -98,7 +98,7 @@ We can pass options as the 4th argument to a promisified version
 ```javascript
 const options = {
   // handler for errors, console by default
-  handleError: console.error,
+  onError: console.error,
   // how much workers will be spawned, number of logical processors by default or 4 if undefined
   numberOfWorkers: navigator.hardwareConcurrency || 4,
   // type of array to be returned from parallel1d and workers
@@ -124,6 +124,9 @@ const workers = new Parallel(SampleWorker, console.log)
 
 // Get the `numberOfWorkers` set in options or by default from a `threads` property
 console.log('Threads number:', workers.threads)
+
+// Get is it already started or no?
+console.log(workers.working ? 'Work in progress' : 'We need to start it first')
 ```
 
 ### Terminating
@@ -135,13 +138,12 @@ If you need to stop all workers immediately, call:
 workers.terminate(callback)
 ```
 
-## Just 419 Bytes
+## Small Size
 
-Size and times are defined with [size-limit](https://www.npmjs.com/package/size-limit):
+With all (0) dependencies, minified and gzipped:
 
-```
-  Size: 502 B with all dependencies, minified and gzipped
-```
+* `require('parallel1d')` 505 B
+* `require('parallel1d/promisified')` 550 B
 
 ## How to Run the Demo Locally
 
