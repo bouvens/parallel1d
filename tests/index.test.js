@@ -89,7 +89,7 @@ test('catch an error with an error handler', (done) => {
   const workers = new Parallel(
     failWorker,
     resultHandler,
-    { numberOfWorkers: 4, handleError: mockErrorHandler },
+    { numberOfWorkers: 4, onError: mockErrorHandler },
   )
   workers.start({ input: Int32Array.from(input) }, input.length)
 })
@@ -108,7 +108,7 @@ test('get defaults', () => {
   expect(Parallel.DEFAULTS).toStrictEqual({
     // handler for errors, console by default
     // eslint-disable-next-line no-console
-    handleError: console.error,
+    onError: console.error,
     // how much workers will be spawned, number of logical processors by default
     numberOfWorkers: globalThis.navigator.hardwareConcurrency,
     // type of array to be returned from parallel1d and workers
