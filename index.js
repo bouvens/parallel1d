@@ -18,6 +18,7 @@ function Parallel1d(
   let finished
   let result
   this.threads = numberOfWorkers
+  this.working = false
 
   const reinitializeResult = () => {
     finished = 0
@@ -53,6 +54,7 @@ function Parallel1d(
       worker.terminate()
     })
     workers = []
+    this.working = false
     return this
   }
 
@@ -60,6 +62,7 @@ function Parallel1d(
     result[i] = data
     finished += 1
     if (finished === this.threads) {
+      this.working = false
       returnUpdated()
     }
   }
@@ -79,6 +82,11 @@ function Parallel1d(
   }
 
   this.start = (options, jobSize) => {
+    if (this.working) {
+      onError('Workers have already started!')
+      return this
+    }
+    this.working = true
     let from = jobSize % this.threads
     const step = (jobSize - from) / this.threads
 
