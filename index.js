@@ -1,15 +1,15 @@
 const DEFAULTS = {
   // eslint-disable-next-line no-console
-  handleError: console.error,
+  onError: console.error,
   numberOfWorkers: (globalThis.navigator || navigator).hardwareConcurrency || 4,
   ArrayConstructor: Array,
 }
 
 function Parallel1d(
   Worker,
-  handleUpdate,
+  onUpdate,
   {
-    handleError = DEFAULTS.handleError,
+    onError = DEFAULTS.onError,
     numberOfWorkers = DEFAULTS.numberOfWorkers,
     ArrayConstructor = DEFAULTS.ArrayConstructor,
   } = DEFAULTS,
@@ -19,7 +19,7 @@ function Parallel1d(
   let result
   this.threads = numberOfWorkers
 
-  function reinitializeResult() {
+  const reinitializeResult = () => {
     finished = 0
     result = []
   }
@@ -44,16 +44,8 @@ function Parallel1d(
       }
     }
 
-    handleUpdate(flattened)
+    onUpdate(flattened)
     reinitializeResult()
-  }
-
-  const catchUpdate = (i) => ({ data }) => {
-    result[i] = data
-    finished += 1
-    if (finished === this.threads) {
-      returnUpdated()
-    }
   }
 
   this.terminate = () => {
@@ -64,17 +56,25 @@ function Parallel1d(
     return this
   }
 
-  const catchError = (error) => {
+  const handleUpdate = (i) => ({ data }) => {
+    result[i] = data
+    finished += 1
+    if (finished === this.threads) {
+      returnUpdated()
+    }
+  }
+
+  const handleError = (error) => {
     this.terminate()
     reinitializeResult()
-    handleError(error)
+    onError(error)
   }
 
   const initialize = () => {
     for (let i = 0; i < this.threads; i++) {
       workers[i] = new Worker()
-      workers[i].addEventListener('message', catchUpdate(i))
-      workers[i].addEventListener('error', catchError)
+      workers[i].addEventListener('message', handleUpdate(i))
+      workers[i].addEventListener('error', handleError)
     }
   }
 
