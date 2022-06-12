@@ -8,13 +8,12 @@ Array.map method.
 ## [Demo and Comparsion](https://bouvens.github.io/parallel1d/)
 
 You can see a live demo
-at <img src="https://raw.githubusercontent.com/bouvens/parallel1d/master/demo/favicon.png" width=16 height=16> [https://bouvens.github.io/parallel1d/](https://bouvens.github.io/parallel1d/)
+at [<img src="https://raw.githubusercontent.com/bouvens/parallel1d/master/demo/favicon.png" width=16 height=16> https://bouvens.github.io/parallel1d/](https://bouvens.github.io/parallel1d/)
 The source code of this demo is available
 in [the repository](https://github.com/bouvens/parallel1d/tree/master/demo).
 
 Example of
-usage: <img src="https://raw.githubusercontent.com/bouvens/griffeath-machine/4e27f6f5df4c6cc77c96ab2e3545cbdc1da0a433/img/favicon.png" width=16 height=16> [Griffeath's Machine](https://bouvens.github.io/griffeath-machine/#/workers)
-.
+usage: [<img src="https://raw.githubusercontent.com/bouvens/griffeath-machine/4e27f6f5df4c6cc77c96ab2e3545cbdc1da0a433/img/favicon.png" width=16 height=16> Griffeath's Machine](https://bouvens.github.io/griffeath-machine/#/workers).
 
 ## Usage
 
