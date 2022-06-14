@@ -15,6 +15,7 @@ module.exports = () => {
       path: path.join(__dirname, 'build'),
       publicPath: '',
       filename: 'bundle.js',
+      assetModuleFilename: 'images/[name].[ext]',
     },
     module: {
       rules: [
@@ -27,6 +28,14 @@ module.exports = () => {
         {
           test: /\.css$/,
           use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        },
+        {
+          test: /\.(html)$/,
+          loader: 'html-loader',
+        },
+        {
+          test: /\.(png|gif|svg|jpe?g)$/,
+          type: 'asset',
         },
       ],
     },
