@@ -1,6 +1,11 @@
 body {
-  margin: 2em 4em;
   font-family: sans-serif;
+}
+
+@media (min-width: 512px) {
+  body {
+    margin: 2em 4em;
+  }
 }
 
 li {
