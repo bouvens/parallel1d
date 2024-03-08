@@ -51,9 +51,13 @@
     "jest": "^27.1.1",
     "mini-css-extract-plugin": "^2.2.2",
     "size-limit": "^5.0.3",
-    "webpack": "^5.22.0",
+    "webpack": "^5.90.3",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^4.2.0",
     "worker-loader": "^3.0.8"
+  },
+  "engines": {
+    "node": ">=20.11.1",
+    "npm": ">=10.2.4"
   }
 }
